@@ -7,6 +7,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 // Refer: https://zenn.dev/razokulover/articles/708bcf4b9623c5
 contract UpgradableGreeterV1 is Initializable {
     string greetingV1;
+    string name;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() initializer {}
@@ -16,6 +17,15 @@ contract UpgradableGreeterV1 is Initializable {
     }
 
     function helloV1() public view returns (string memory) {
-        return greetingV1;
+        // name に値があれば greetingV1 に name を付け足して返す
+        if (bytes(name).length > 0) {
+            return string(abi.encodePacked(greetingV1, " Hi, ", name, "!"));
+        } else {
+            return greetingV1;
+        }
+    }
+
+    function setName(string memory _name) public {
+        name = _name;
     }
 }

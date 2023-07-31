@@ -9,6 +9,9 @@ async function main() {
   console.log("Greeter V1 deployed to:", await greeter.getAddress());
 
   console.log("helloV1:", await greeter.helloV1());
+
+  await greeter.setName("Taro");
+  console.log("helloV1:", await greeter.helloV1());
 }
 
 main()

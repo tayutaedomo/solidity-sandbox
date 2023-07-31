@@ -23,7 +23,9 @@ import type {
 } from "../common";
 
 export interface UpgradableGreeterV1Interface extends Interface {
-  getFunction(nameOrSignature: "helloV1" | "initialize"): FunctionFragment;
+  getFunction(
+    nameOrSignature: "helloV1" | "initialize" | "setName"
+  ): FunctionFragment;
 
   getEvent(nameOrSignatureOrTopic: "Initialized"): EventFragment;
 
@@ -32,9 +34,11 @@ export interface UpgradableGreeterV1Interface extends Interface {
     functionFragment: "initialize",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "setName", values: [string]): string;
 
   decodeFunctionResult(functionFragment: "helloV1", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setName", data: BytesLike): Result;
 }
 
 export namespace InitializedEvent {
@@ -96,6 +100,8 @@ export interface UpgradableGreeterV1 extends BaseContract {
 
   initialize: TypedContractMethod<[], [void], "nonpayable">;
 
+  setName: TypedContractMethod<[_name: string], [void], "nonpayable">;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
@@ -106,6 +112,9 @@ export interface UpgradableGreeterV1 extends BaseContract {
   getFunction(
     nameOrSignature: "initialize"
   ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setName"
+  ): TypedContractMethod<[_name: string], [void], "nonpayable">;
 
   getEvent(
     key: "Initialized"

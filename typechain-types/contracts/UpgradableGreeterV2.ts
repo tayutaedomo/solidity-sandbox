@@ -30,6 +30,7 @@ export interface UpgradableGreeterV2Interface extends Interface {
       | "initialize"
       | "initializeV2"
       | "returnV1StateFromV2"
+      | "setName"
   ): FunctionFragment;
 
   getEvent(nameOrSignatureOrTopic: "Initialized"): EventFragment;
@@ -48,6 +49,7 @@ export interface UpgradableGreeterV2Interface extends Interface {
     functionFragment: "returnV1StateFromV2",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "setName", values: [string]): string;
 
   decodeFunctionResult(functionFragment: "helloV1", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "helloV2", data: BytesLike): Result;
@@ -60,6 +62,7 @@ export interface UpgradableGreeterV2Interface extends Interface {
     functionFragment: "returnV1StateFromV2",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setName", data: BytesLike): Result;
 }
 
 export namespace InitializedEvent {
@@ -127,6 +130,8 @@ export interface UpgradableGreeterV2 extends BaseContract {
 
   returnV1StateFromV2: TypedContractMethod<[], [string], "view">;
 
+  setName: TypedContractMethod<[_name: string], [void], "nonpayable">;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
@@ -146,6 +151,9 @@ export interface UpgradableGreeterV2 extends BaseContract {
   getFunction(
     nameOrSignature: "returnV1StateFromV2"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "setName"
+  ): TypedContractMethod<[_name: string], [void], "nonpayable">;
 
   getEvent(
     key: "Initialized"
