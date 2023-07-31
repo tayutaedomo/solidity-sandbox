@@ -10,3 +10,5 @@ export type { Initializable } from "./@openzeppelin/contracts-upgradeable/proxy/
 export { Initializable__factory } from "./factories/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable__factory";
 export type { UpgradableGreeterV1 } from "./contracts/UpgradableGreeterV1";
 export { UpgradableGreeterV1__factory } from "./factories/contracts/UpgradableGreeterV1__factory";
+export type { UpgradableGreeterV2 } from "./contracts/UpgradableGreeterV2";
+export { UpgradableGreeterV2__factory } from "./factories/contracts/UpgradableGreeterV2__factory";

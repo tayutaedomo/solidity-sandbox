@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { UpgradableGreeterV1__factory } from "./UpgradableGreeterV1__factory";
+export { UpgradableGreeterV2__factory } from "./UpgradableGreeterV2__factory";

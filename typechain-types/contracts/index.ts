@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { UpgradableGreeterV1 } from "./UpgradableGreeterV1";
+export type { UpgradableGreeterV2 } from "./UpgradableGreeterV2";

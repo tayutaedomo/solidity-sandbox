@@ -7,6 +7,8 @@ async function main() {
   });
   await greeter.waitForDeployment();
   console.log("Greeter V1 deployed to:", await greeter.getAddress());
+
+  console.log("helloV1:", await greeter.helloV1());
 }
 
 main()

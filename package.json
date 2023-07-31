@@ -7,7 +7,8 @@
     "test": "npx hardhat test",
     "node": "npx hardhat node",
     "compile": "npx hardhat compile",
-    "upgrade:run:v1": "npx hardhat run scripts/run_upgradeable_greeter_v1.ts"
+    "upgrade:run:v1": "npx hardhat run scripts/run_upgradable_greeter_v1.ts",
+    "upgrade:run:v2": "npx hardhat run scripts/run_upgradable_greeter_v2.ts"
   },
   "keywords": [],
   "author": "",

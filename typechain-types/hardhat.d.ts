@@ -21,6 +21,10 @@ declare module "hardhat/types/runtime" {
       name: "UpgradableGreeterV1",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.UpgradableGreeterV1__factory>;
+    getContractFactory(
+      name: "UpgradableGreeterV2",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UpgradableGreeterV2__factory>;
 
     getContractAt(
       name: "Initializable",
@@ -32,6 +36,11 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.UpgradableGreeterV1>;
+    getContractAt(
+      name: "UpgradableGreeterV2",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UpgradableGreeterV2>;
 
     deployContract(
       name: "Initializable",
@@ -41,6 +50,10 @@ declare module "hardhat/types/runtime" {
       name: "UpgradableGreeterV1",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.UpgradableGreeterV1>;
+    deployContract(
+      name: "UpgradableGreeterV2",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UpgradableGreeterV2>;
 
     deployContract(
       name: "Initializable",
@@ -52,6 +65,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.UpgradableGreeterV1>;
+    deployContract(
+      name: "UpgradableGreeterV2",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UpgradableGreeterV2>;
 
     // default types
     getContractFactory(
