@@ -4,13 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx hardhat test"
+    "test": "npx hardhat test",
+    "node": "npx hardhat node",
+    "compile": "npx hardhat compile",
+    "upgrade:run:v1": "npx hardhat run scripts/run_upgradeable_greeter_v1.ts"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
-    "hardhat": "^2.17.0"
+    "@openzeppelin/contracts-upgradeable": "^4.9.3",
+    "@openzeppelin/hardhat-upgrades": "^2.0.2",
+    "hardhat": "^2.17.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-solidity": "^1.1.3"
   }
 }
