@@ -137,5 +137,6 @@ dist
 
 artifacts
 cache
+.openzeppelin
 
 .vscode
