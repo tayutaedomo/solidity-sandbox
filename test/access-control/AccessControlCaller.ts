@@ -4,7 +4,7 @@ import { ethers } from "hardhat";
 
 describe("AccessControlCaller", function () {
   async function deployContract() {
-    const [owner, account1, account2] = await ethers.getSigners();
+    const [owner, account1] = await ethers.getSigners();
 
     const AccessControlContract = await ethers.getContractFactory(
       "AccessControlContract",
@@ -21,7 +21,6 @@ describe("AccessControlCaller", function () {
     return {
       owner,
       account1,
-      account2,
       accessControlContract,
       accessControlCaller,
     };
@@ -40,8 +39,17 @@ describe("AccessControlCaller", function () {
 
   describe("hello", function () {
     it("should return correct value", async function () {
-      const { accessControlCaller, owner } = await loadFixture(deployContract);
+      const { accessControlContract, accessControlCaller, owner, account1 } =
+        await loadFixture(deployContract);
       expect(await accessControlCaller.connect(owner).hello()).to.equal(
+        "hello",
+      );
+
+      await accessControlContract
+        .connect(owner)
+        .grantHelloRole([account1.address]);
+
+      expect(await accessControlCaller.connect(account1).hello()).to.equal(
         "hello",
       );
     });

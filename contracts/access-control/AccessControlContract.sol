@@ -12,4 +12,20 @@ contract AccessControlContract is AccessControl {
         _grantRole(HELLO_ROLE, msg.sender);
         _setRoleAdmin(HELLO_ROLE, ADMIN_ROLE);
     }
+
+    function grantHelloRole(
+        address[] memory accounts
+    ) external onlyRole(ADMIN_ROLE) {
+        for (uint256 i = 0; i < accounts.length; i++) {
+            grantRole(HELLO_ROLE, accounts[i]);
+        }
+    }
+
+    function revokeHelloRole(
+        address[] memory accounts
+    ) external onlyRole(ADMIN_ROLE) {
+        for (uint256 i = 0; i < accounts.length; i++) {
+            revokeRole(HELLO_ROLE, accounts[i]);
+        }
+    }
 }
