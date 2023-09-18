@@ -7,6 +7,7 @@
     "test": "npx hardhat test",
     "node": "npx hardhat node",
     "compile": "npx hardhat compile",
+    "size": "npx hardhat size-contracts",
     "upgrade:run:v1": "npx hardhat run scripts/upgradeable/run_upgradable_greeter_v1.ts",
     "upgrade:run:v2": "npx hardhat run scripts/upgradeable/run_upgradable_greeter_v2.ts",
     "upgrade:deploy:sepolia:v1": "npx hardhat run scripts/upgradeable/deploy_upgradable_greeter_v1.ts  --network sepolia",
@@ -20,6 +21,7 @@
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
     "@openzeppelin/hardhat-upgrades": "^2.0.2",
     "hardhat": "^2.17.0",
+    "hardhat-contract-sizer": "^2.10.0",
     "prettier": "^3.0.0",
     "prettier-plugin-solidity": "^1.1.3"
   },
