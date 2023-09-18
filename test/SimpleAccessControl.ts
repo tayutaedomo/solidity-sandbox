@@ -44,9 +44,35 @@ describe("SimpleAccessControl", function () {
 
     it("should revert if not role granted", async function () {
       const { accessControl, account1 } = await loadFixture(deployContract);
-      await expect(accessControl.connect(account1).hello()).to.be.revertedWith(
-        "Caller does'n have a HELLO_ROLE",
+      await expect(accessControl.connect(account1).hello()).to.be.reverted;
+    });
+  });
+
+  describe("Role Management", function () {
+    it("should allow admin to grant and revoke HELLO_ROLE", async function () {
+      const { accessControl, owner, account1 } = await loadFixture(
+        deployContract,
       );
+
+      await accessControl.connect(owner).grantHelloRole(account1.address);
+      expect(
+        await accessControl.hasRole(
+          await accessControl.HELLO_ROLE(),
+          account1.address,
+        ),
+      ).to.equal(true);
+
+      expect(await accessControl.connect(account1).hello()).to.equal("hello");
+
+      await accessControl.connect(owner).revokeHelloRole(account1.address);
+      expect(
+        await accessControl.hasRole(
+          await accessControl.HELLO_ROLE(),
+          account1.address,
+        ),
+      ).to.equal(false);
+
+      await expect(accessControl.connect(account1).hello()).to.be.reverted;
     });
   });
 });

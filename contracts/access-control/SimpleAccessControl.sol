@@ -13,11 +13,15 @@ contract SimpleAccessControl is AccessControl {
         _setRoleAdmin(HELLO_ROLE, ADMIN_ROLE);
     }
 
-    function hello() public view returns (string memory) {
-        require(
-            hasRole(HELLO_ROLE, msg.sender),
-            "Caller does'n have a HELLO_ROLE"
-        );
+    function hello() public view onlyRole(HELLO_ROLE) returns (string memory) {
         return "hello";
+    }
+
+    function grantHelloRole(address account) public onlyRole(ADMIN_ROLE) {
+        grantRole(HELLO_ROLE, account);
+    }
+
+    function revokeHelloRole(address account) public onlyRole(ADMIN_ROLE) {
+        revokeRole(HELLO_ROLE, account);
     }
 }
