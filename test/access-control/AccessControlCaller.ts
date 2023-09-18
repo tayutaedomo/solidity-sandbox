@@ -37,4 +37,22 @@ describe("AccessControlCaller", function () {
       );
     });
   });
+
+  describe("hello", function () {
+    it("should return correct value", async function () {
+      const { accessControlCaller, owner } = await loadFixture(deployContract);
+      expect(await accessControlCaller.connect(owner).hello()).to.equal(
+        "hello",
+      );
+    });
+
+    it("should revert if not role granted", async function () {
+      const { accessControlCaller, account1 } = await loadFixture(
+        deployContract,
+      );
+      await expect(
+        accessControlCaller.connect(account1).hello(),
+      ).to.be.revertedWith("Caller doesn't have HELLO_ROLE");
+    });
+  });
 });
