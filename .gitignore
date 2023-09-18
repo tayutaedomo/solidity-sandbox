@@ -138,5 +138,6 @@ dist
 artifacts
 cache
 .openzeppelin
+typechain-types
 
 .vscode
