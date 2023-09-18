@@ -4,14 +4,14 @@ import { ethers } from "hardhat";
 
 describe("SimpleAccessControl", function () {
   async function deployContract() {
-    const [owner, account1] = await ethers.getSigners();
+    const [owner, account1, account2] = await ethers.getSigners();
 
     const AccessControl = await ethers.getContractFactory(
       "SimpleAccessControl",
     );
     const accessControl = await AccessControl.deploy();
 
-    return { owner, account1, accessControl };
+    return { owner, account1, account2, accessControl };
   }
 
   describe("Deployment", function () {
@@ -50,25 +50,41 @@ describe("SimpleAccessControl", function () {
 
   describe("Role Management", function () {
     it("should allow admin to grant and revoke HELLO_ROLE", async function () {
-      const { accessControl, owner, account1 } = await loadFixture(
+      const { accessControl, owner, account1, account2 } = await loadFixture(
         deployContract,
       );
 
-      await accessControl.connect(owner).grantHelloRole(account1.address);
+      await accessControl
+        .connect(owner)
+        .grantHelloRole([account1.address, account2.address]);
       expect(
         await accessControl.hasRole(
           await accessControl.HELLO_ROLE(),
           account1.address,
         ),
       ).to.equal(true);
+      expect(
+        await accessControl.hasRole(
+          await accessControl.HELLO_ROLE(),
+          account2.address,
+        ),
+      ).to.equal(true);
 
       expect(await accessControl.connect(account1).hello()).to.equal("hello");
 
-      await accessControl.connect(owner).revokeHelloRole(account1.address);
+      await accessControl
+        .connect(owner)
+        .revokeHelloRole([account1.address, account2.address]);
       expect(
         await accessControl.hasRole(
           await accessControl.HELLO_ROLE(),
           account1.address,
+        ),
+      ).to.equal(false);
+      expect(
+        await accessControl.hasRole(
+          await accessControl.HELLO_ROLE(),
+          account2.address,
         ),
       ).to.equal(false);
 

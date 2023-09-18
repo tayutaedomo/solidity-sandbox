@@ -17,11 +17,19 @@ contract SimpleAccessControl is AccessControl {
         return "hello";
     }
 
-    function grantHelloRole(address account) public onlyRole(ADMIN_ROLE) {
-        grantRole(HELLO_ROLE, account);
+    function grantHelloRole(
+        address[] memory accounts
+    ) public onlyRole(ADMIN_ROLE) {
+        for (uint256 i = 0; i < accounts.length; i++) {
+            grantRole(HELLO_ROLE, accounts[i]);
+        }
     }
 
-    function revokeHelloRole(address account) public onlyRole(ADMIN_ROLE) {
-        revokeRole(HELLO_ROLE, account);
+    function revokeHelloRole(
+        address[] memory accounts
+    ) public onlyRole(ADMIN_ROLE) {
+        for (uint256 i = 0; i < accounts.length; i++) {
+            revokeRole(HELLO_ROLE, accounts[i]);
+        }
     }
 }
